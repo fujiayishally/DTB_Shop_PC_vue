@@ -1,9 +1,15 @@
 <template>
-  <div>
-    <svg class="icon-svg" aria-hidden="true">
+  <span :class="className" v-on="$listeners">
+    <svg
+      class="icon-svg"
+      aria-hidden="true"
+      :width="size"
+      :height="size"
+      :fill="color"
+    >
       <use :xlink:href="iconName" />
     </svg>
-  </div>
+  </span>
 </template>
 <script>
 export default {
@@ -12,6 +18,18 @@ export default {
     type: {
       type: String,
       required: true,
+    },
+    className: {
+      type: String,
+      default: '',
+    },
+    color: {
+      type: String,
+      default: 'currentColor',
+    },
+    size: {
+      type: String,
+      default: '1em',
     },
   },
   computed: {
@@ -25,10 +43,9 @@ export default {
 
 <style>
 .icon-svg {
-  width: 1em;
-  height: 1em;
   vertical-align: -0.15em;
-  fill: currentColor;
   overflow: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 </style>
