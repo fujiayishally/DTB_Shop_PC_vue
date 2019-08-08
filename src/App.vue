@@ -3,3 +3,8 @@
     <router-view />
   </div>
 </template>
+<style scoped>
+#app {
+  min-width: 1200px;
+}
+</style>

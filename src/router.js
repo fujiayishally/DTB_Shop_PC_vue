@@ -6,5 +6,29 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [],
+  routes: [
+    {
+      path: '/',
+      component: () =>
+        import(/* webpackChunkName: "layout" */ '@/layouts/BaseLayout'),
+      children: [
+        {
+          path: '/',
+          redirect: '/home',
+        },
+        {
+          path: '/home',
+          name: 'home',
+          component: () =>
+            import(/* webpackChunkName: "home" */ './views/Home'),
+        },
+        {
+          path: '/product',
+          name: 'product',
+          component: () =>
+            import(/* webpackChunkName: "product" */ './views/Product'),
+        },
+      ],
+    },
+  ],
 })

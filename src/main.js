@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import http from '@/utils/http'
 
 // 自定义组件
 import IconSvg from '@/components/Icon'
@@ -12,8 +13,9 @@ import '@/assets/styles/global.scss'
 
 Vue.use(IconSvg)
 Vue.use(Button)
-
 Vue.config.productionTip = false
+Vue.prototype.$http = http
+
 new Vue({
   router,
   store,
