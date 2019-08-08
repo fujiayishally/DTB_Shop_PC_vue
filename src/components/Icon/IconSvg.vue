@@ -1,12 +1,6 @@
 <template>
-  <span :class="className" v-on="$listeners">
-    <svg
-      class="icon-svg"
-      aria-hidden="true"
-      :width="size"
-      :height="size"
-      :fill="color"
-    >
+  <span :class="className" class="icon-svg" v-on="$listeners">
+    <svg aria-hidden="true" :width="size" :height="size" :fill="color">
       <use :xlink:href="iconName" />
     </svg>
   </span>
@@ -41,8 +35,12 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style>
 .icon-svg {
+  display: inline-block;
+  vertical-align: top;
+}
+.icon-svg svg {
   vertical-align: middle;
   transform: translateY(-0.15em);
   overflow: hidden;

@@ -8,6 +8,7 @@
       :type="leftIcon"
       :size="$attrs['icon-size']"
     />
+
     <span v-if="$slots.default" :class="buttonTextClass">
       <slot></slot>
     </span>
@@ -123,7 +124,7 @@ $sizes: (
   .#{$ButtonPrefix + '-' + $sizeName} {
     min-width: map-get($settings, width);
     height: map-get($settings, height);
-    line-height: map-get($settings, height) - 2;
+    line-height: map-get($settings, line-height);
     padding: map-get($settings, padding);
     font-size: map-get($settings, font);
   }
@@ -183,8 +184,6 @@ $types: (
   vertical-align: top;
 }
 .#{$ButtonPrefix} .#{$ButtonPrefix + '-button-icon'} {
-  display: inline-block;
-  vertical-align: top;
-  margin-top: -1px;
+  // margin-top: -1px;
 }
 </style>

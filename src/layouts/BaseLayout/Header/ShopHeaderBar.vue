@@ -1,5 +1,5 @@
 <template>
-  <h2>Header</h2>
+  <div>ShopHeaderBar</div>
 </template>
 
 <script>

@@ -3,8 +3,8 @@
     <router-view />
   </div>
 </template>
-<style scoped>
+<style lang="scss" scoped>
 #app {
-  min-width: 1200px;
+  min-width: $viewportWidth;
 }
 </style>
