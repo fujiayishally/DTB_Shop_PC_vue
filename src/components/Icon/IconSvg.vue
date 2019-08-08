@@ -41,9 +41,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .icon-svg {
-  vertical-align: -0.15em;
+  vertical-align: middle;
+  transform: translateY(-0.15em);
   overflow: hidden;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

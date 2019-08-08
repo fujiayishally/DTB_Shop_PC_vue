@@ -4,8 +4,14 @@ import router from './router'
 import store from './store'
 
 // 自定义组件
-import IconSvg from '@/components/Icon/index'
+import IconSvg from '@/components/Icon'
+import Button from '@/components/Button'
+
+// 全局样式
+import '@/assets/styles/global.scss'
+
 Vue.use(IconSvg)
+Vue.use(Button)
 
 Vue.config.productionTip = false
 new Vue({

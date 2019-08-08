@@ -5,6 +5,15 @@ const resolve = function(dir) {
 }
 
 module.exports = {
+  css: {
+    loaderOptions: {
+      sass: {
+        data: `
+        @import "@/assets/styles/index.scss";
+        `,
+      },
+    },
+  },
   chainWebpack: config => {
     config.module
       .rule('svg')
