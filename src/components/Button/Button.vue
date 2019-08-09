@@ -1,5 +1,5 @@
 <template>
-  <button :class="typeClass">
+  <button :class="typeClass" v-on="$listeners">
     <IconSvg type="loading" v-if="isLoading" :class="loadingClass" />
 
     <IconSvg
@@ -111,6 +111,7 @@ export default {
   box-sizing: border-box;
   -webkit-appearance: none;
   border-radius: $ButtonRadius;
+  outline: none;
 }
 
 $sizes: (
@@ -183,7 +184,7 @@ $types: (
   margin-right: 5px;
   vertical-align: top;
 }
-.#{$ButtonPrefix} .#{$ButtonPrefix + '-button-icon'} {
-  // margin-top: -1px;
-}
+// .#{$ButtonPrefix} .#{$ButtonPrefix + '-button-icon'} {
+// margin-top: -1px;
+// }
 </style>
