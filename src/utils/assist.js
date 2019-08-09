@@ -50,7 +50,6 @@ function findComponentUpward(context, componentName) {
   while (parent && (!name || [componentName].indexOf(name) < 0)) {
     parent = parent.$parent
     if (parent) name = parent.$options.name
-    findComponentDownward(parent, componentName)
   }
   return parent
 }
