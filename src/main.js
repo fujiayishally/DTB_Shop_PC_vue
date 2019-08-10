@@ -8,6 +8,7 @@ import http from '@/utils/http'
 import IconSvg from '@/components/Icon'
 import Button from '@/components/Button'
 import VLink from '@/components/VLink'
+import Alert from '@/components/Alert'
 
 // 全局样式
 import '@/assets/styles/global.scss'
@@ -18,6 +19,7 @@ Vue.use(VLink)
 
 Vue.config.productionTip = false
 Vue.prototype.$http = http
+Vue.prototype.$Alert = Alert
 
 new Vue({
   router,
