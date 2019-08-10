@@ -89,7 +89,7 @@ export default {
         this.parent.handleChange(this.model)
       } else {
         this.$emit('on-change', value)
-        this.disabled('FormItem', 'on-form-change', value)
+        this.dispatch('FormItem', 'on-form-change', value)
       }
     },
   },

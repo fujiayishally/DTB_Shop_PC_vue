@@ -103,9 +103,10 @@ function findComponentsDownward(context, componentName) {
  */
 function findBrothersComponents(context, componentName, exceptMe = true) {
   return context.$parent.$children.filter(item => {
-    return item.$options.name === componentName && exceptMe
-      ? !(context._uid === item._uid)
-      : true
+    return (
+      item.$options.name === componentName &&
+      (exceptMe ? !(context._uid === item._uid) : true)
+    )
   })
 }
 
