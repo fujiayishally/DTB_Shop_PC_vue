@@ -1,7 +1,9 @@
 import Icon from '@/components/Icon'
+import Button from '@/components/Button'
 
 const globalComponents = {
   Icon,
+  Button,
 }
 
 const install = function(Vue) {
@@ -12,9 +14,6 @@ const install = function(Vue) {
 
   // Vue.prototype.$Alert = Alert
 }
-// import Button from '@/components/Button'
 // import Alert from '@/components/Alert'
-// Vue.use(IconSvg)
-// Vue.use(Button)
 
 export default { install }

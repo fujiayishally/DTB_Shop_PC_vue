@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="demo">
-      <Button>按钮</Button>
       <Button type="default">按钮</Button>
       <Button type="primary">按钮</Button>
-      <Button type="save">按钮</Button>
-      <Button type="danger">按钮</Button>
-      <Button type="warning">按钮</Button>
       <Button type="info">按钮</Button>
+      <Button type="success">按钮</Button>
+      <Button type="warning">按钮</Button>
+      <Button type="error">按钮</Button>
+      <Button type="text">按钮</Button>
     </div>
     <div class="demo">
       <Button>按钮</Button>
@@ -51,3 +51,13 @@
     </div>
   </div>
 </template>
+
+<style lang="scss">
+.demo {
+  margin: 10px;
+
+  & > * {
+    margin: 10px;
+  }
+}
+</style>

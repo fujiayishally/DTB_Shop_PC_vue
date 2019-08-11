@@ -1,4 +1,11 @@
 // Prefix
+@function tint($color, $rate) {
+  @return mix(#fff, $color, $rate);
+}
+@function shade($color, $rate) {
+  @return mix(#000, $color, $rate);
+}
+
 $css-prefix: 'vu-';
 $css-prefix-icon: 'vu-icon';
 
@@ -11,7 +18,7 @@ $error-color: #ed4014;
 $normal-color: #e6ebf1;
 $link-color: #2d8cf0;
 $link-hover-color: tint($link-color, 20%);
-$link-active-color: shade($link-color, 5%);
+$link-active-color: fade($link-color, 5%);
 $selected-color: fade($primary-color, 90%);
 $white: #fff;
 $black: #000;
@@ -86,6 +93,7 @@ $btn-default-border: $border-color-base;
 
 $btn-primary-color: #fff;
 $btn-primary-bg: $primary-color;
+$btn-primary-border: $primary-color;
 
 $btn-ghost-color: $text-color;
 $btn-ghost-bg: #fff;

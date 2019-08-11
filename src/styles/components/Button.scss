@@ -1,0 +1,27 @@
+$prefixCls: $css-prefix + 'btn';
+
+.#{$prefixCls} {
+  @include btn();
+
+  &-default {
+    @include btn-default();
+  }
+  &-primary {
+    @include btn-primary();
+  }
+  &-info {
+    @include btn-fix-color($info-color);
+  }
+  &-success {
+    @include btn-fix-color($success-color);
+  }
+  &-warning {
+    @include btn-fix-color($warning-color);
+  }
+  &-error {
+    @include btn-fix-color($error-color);
+  }
+  &-text {
+    @include btn-text();
+  }
+}

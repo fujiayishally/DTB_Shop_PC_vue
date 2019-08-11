@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import example from '@/components/Tree/example'
+import example from '@/components/Button/example'
 
 export default {
   name: 'Home',
