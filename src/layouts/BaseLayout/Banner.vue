@@ -1,8 +1,12 @@
 <template>
-  <div class="banner" :style="{ backgroundImage: 'url(' + src + ')' }"></div>
+  <div
+    class="base-layout-banner"
+    :style="{ backgroundImage: 'url(' + src + ')' }"
+  ></div>
 </template>
 <script>
 export default {
+  name: 'BaseLayoutBanner',
   props: {
     src: {
       type: String,
@@ -11,9 +15,8 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.banner {
+<style lang="scss">
+.base-layout-banner {
   width: 100%;
   min-height: 100px;
   background-size: cover;

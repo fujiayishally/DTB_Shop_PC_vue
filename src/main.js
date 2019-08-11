@@ -3,24 +3,18 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import http from '@/utils/http'
-
-// 自定义组件
-import IconSvg from '@/components/Icon'
-import Button from '@/components/Button'
-import VLink from '@/components/VLink'
-import Alert from '@/components/Alert'
+import GlobalComponents from '@/components/installGlobalComponents'
 
 // 全局样式
-import '@/assets/styles/global.scss'
+import '@/styles/common/index.scss'
 
-Vue.use(IconSvg)
-Vue.use(Button)
-Vue.use(VLink)
+// 全局方法
+Vue.prototype.$http = http
+
+// 安装全局组件
+Vue.use(GlobalComponents)
 
 Vue.config.productionTip = false
-Vue.prototype.$http = http
-Vue.prototype.$Alert = Alert
-
 new Vue({
   router,
   store,

@@ -1,24 +1,24 @@
 <template>
-  <div class="userInfoBar">
-    <div class="innerWrapper">
+  <div class="user-info-bar">
+    <div class="inner">
       <div>
-        <VLink to="#" :color="BaseColor">首页</VLink>
-        <VLink to="#" :color="BaseColor">登陆</VLink>
-        <VLink to="#">注册</VLink>
-        <VLink to="#">消息</VLink>
+        <router-link to="#" class="primary">首页</router-link>
+        <router-link to="#" class="primary">登陆</router-link>
+        <router-link to="#">注册</router-link>
+        <router-link to="#">消息</router-link>
       </div>
       <div>
-        <VLink to="#">我的购物车(0)</VLink>
-        <VLink to="#">
+        <router-link to="#">我的购物车(0)</router-link>
+        <router-link to="#">
           我的订单
-          <IconSvg type="down" />
-        </VLink>
-        <VLink to="#">
+          <Icon type="down" />
+        </router-link>
+        <router-link to="#">
           客服中心
-          <IconSvg type="down" />
-        </VLink>
-        <VLink to="#"> <IconSvg type="mobile" />手机版 </VLink>
-        <VLink to="#">
+          <Icon type="down" />
+        </router-link>
+        <router-link to="#"> <Icon type="mobile" />手机版 </router-link>
+        <!-- <router-link to="#">
           <Button
             type="primary"
             size="mini"
@@ -27,45 +27,43 @@
             round
             >综合办公室</Button
           >
-        </VLink>
+        </router-link>-->
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { BaseColor } from '@/assets/styles/color.scss'
-
 export default {
-  data() {
-    return { BaseColor }
-  },
+  name: 'BaseLayoutHeaderUserInfoBar',
 }
 </script>
 
-<style lang="scss" scoped>
-.userInfoBar {
+<style lang="scss">
+.user-info-bar {
   height: 36px;
   line-height: 36px;
-  background: $Dark;
+  background: #333;
 
-  .innerWrapper {
+  .inner {
     display: flex;
     justify-content: space-between;
     margin: auto;
-    width: $viewportWidth;
-  }
-  a {
-    color: $LightWhite;
-    &:not(:first-child):before {
-      content: '|';
-      margin: 0 8px;
-      color: $LightWhite;
+    width: $screen-xl;
+    a {
+      color: $normal-color;
+      &.primary {
+        color: $primary-color;
+      }
+      &:not(:first-child):before {
+        content: '|';
+        margin: 0 8px;
+      }
     }
 
-    .icon-svg {
-      margin-top: 0.15em;
-    }
+    //     .icon-svg {
+    //       margin-top: 0.15em;
+    //     }
   }
 }
 </style>

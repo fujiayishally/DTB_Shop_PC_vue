@@ -38,7 +38,8 @@
     "sass-loader": "^7.1.0",
     "svg-sprite-loader": "^4.1.6",
     "svgo": "^1.3.0",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "webpack-spritesmith": "^1.0.1"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"

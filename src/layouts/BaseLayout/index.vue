@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="base-layout">
     <BannerVue :src="bannerImg" />
-    <HeaderVue></HeaderVue>
-    <router-view />
-    <FooterVue></FooterVue>
+    <HeaderVue />
+    <router-view></router-view>
+    <FooterVue />
   </div>
 </template>
 
@@ -13,12 +13,13 @@ import HeaderVue from './Header'
 import FooterVue from './Footer'
 
 export default {
+  name: 'BaseLayout',
+  components: { BannerVue, HeaderVue, FooterVue },
   data() {
     return {
       bannerImg: '',
     }
   },
-  components: { BannerVue, HeaderVue, FooterVue },
   mounted() {
     this.getHomeData()
   },
@@ -36,4 +37,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss">
+.base-layout {
+  min-width: $screen-xl;
+}
+</style>

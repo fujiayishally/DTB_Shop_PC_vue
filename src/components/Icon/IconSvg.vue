@@ -1,50 +1,63 @@
 <template>
-  <span :class="className" class="icon-svg" v-on="$listeners">
-    <svg aria-hidden="true" :width="size" :height="size" :fill="color">
+  <span :class="classes" :style="styles" @click="handleClick">
+    <svg aria-hidden="true" :fill="color">
       <use :xlink:href="iconName" />
     </svg>
   </span>
 </template>
 <script>
+const prefixCls = 'icon-svg'
+
 export default {
-  name: 'IconSvg',
+  name: 'IconSVG',
   props: {
     type: {
       type: String,
       required: true,
     },
-    className: {
-      type: String,
-      default: '',
-    },
+    size: String,
     color: {
       type: String,
       default: 'currentColor',
     },
-    size: {
-      type: String,
-      default: '1em',
-    },
   },
   computed: {
+    classes() {
+      return [`${prefixCls}`]
+    },
+    styles() {
+      return {
+        width: this.size,
+        height: this.size,
+        color: this.color,
+      }
+    },
     iconName() {
-      return `#icon-${this.type}`
+      return `#${prefixCls}-${this.type}`
     },
   },
-  methods: {},
+  methods: {
+    handleClick(event) {
+      this.$emit('click', event)
+    },
+  },
 }
 </script>
 
-<style>
+<style lang="scss">
 .icon-svg {
   display: inline-block;
-  vertical-align: top;
-}
-.icon-svg svg {
   vertical-align: middle;
-  transform: translateY(-0.15em);
-  overflow: hidden;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
+  width: $font-size-base;
+  height: $font-size-base;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    vertical-align: top;
+    overflow: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
 }
 </style>

@@ -1,13 +1,9 @@
-import IconSvg from './IconSvg'
+import Icon from './Icon'
 
 const requireAll = requireContext => {
   requireContext.keys().map(requireContext)
 }
-const reqSvgContext = require.context('@/assets/IconSvg', false, /\.svg$/)
+const reqSvgContext = require.context('@/assets/icon-svg', false, /\.svg$/)
 requireAll(reqSvgContext)
 
-export default {
-  install(Vue) {
-    Vue.component('IconSvg', IconSvg)
-  },
-}
+export default Icon

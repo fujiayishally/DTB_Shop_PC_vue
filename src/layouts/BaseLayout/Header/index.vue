@@ -1,14 +1,21 @@
 <template>
-  <div class="header">
+  <div class="base-layout-header">
     <UserInfoBar />
+    <ShopHeaderBar />
   </div>
 </template>
 
 <script>
 import UserInfoBar from './UserInfoBar'
+import ShopHeaderBar from './ShopHeaderBar'
 export default {
-  components: { UserInfoBar },
+  name: 'BaseLayoutHeader',
+  components: { UserInfoBar, ShopHeaderBar },
 }
 </script>
 
-<style></style>
+<style lang="scss">
+.base-layout-header {
+  box-shadow: $shadow-down;
+}
+</style>

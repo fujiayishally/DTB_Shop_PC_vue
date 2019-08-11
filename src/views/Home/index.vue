@@ -1,12 +1,12 @@
 <template>
-  <div class="home">
-    <h1>Home Page</h1>
-  </div>
+  <example></example>
 </template>
 
 <script>
+import example from '@/components/Tree/example'
+
 export default {
   name: 'Home',
-  components: {},
+  components: { example },
 }
 </script>
