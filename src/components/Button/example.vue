@@ -66,6 +66,12 @@
       <Button type="primary" shape="circle" loading></Button>
       <Button type="primary" loading>Loading...</Button>
     </div>
+    <div class="demo">
+      <p>跳转按钮</p>
+      <Button to="/product">Normal</Button>
+      <Button to="/product" replace>No history</Button>
+      <Button to="//baidu.com" target="_blank">New window</Button>
+    </div>
   </div>
 </template>
 

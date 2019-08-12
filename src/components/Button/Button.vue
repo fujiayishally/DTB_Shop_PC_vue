@@ -4,7 +4,7 @@
     :class="classes"
     :disabled="disabled"
     v-bind="tagProps"
-    @click="handleClick"
+    @click="handleClickButton"
   >
     <Icon v-if="loading" class="vu-load-loop" type="loading" />
     <Icon v-if="icon" :type="icon" />
@@ -118,6 +118,14 @@ export default {
   },
   mounted() {
     this.showSlot = !!this.$slots.default
+  },
+  methods: {
+    handleClickButton(event) {
+      this.$emit('click', event)
+
+      const new_window = event.ctrlKey || event.metaKey
+      this.handleCheckClick(event, new_window)
+    },
   },
 }
 </script>
