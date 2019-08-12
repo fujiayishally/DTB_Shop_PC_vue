@@ -1,11 +1,17 @@
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+@function fade($color, $percentage) {
+  @return transparentize($color, $percentage/100);
+}
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
 // Prefix
-@function tint($color, $rate) {
-  @return mix(#fff, $color, $rate);
-}
-@function shade($color, $rate) {
-  @return mix(#000, $color, $rate);
-}
-
 $css-prefix: 'vu-';
 $css-prefix-icon: 'vu-icon';
 
@@ -72,12 +78,12 @@ $shadow-base: $shadow-down;
 
 // Button
 $btn-font-weight: normal;
-$btn-padding-base: 5px 15px 6px;
+$btn-padding-base: 4px 15px 7px;
 $btn-padding-small: 1px 7px 2px;
-$btn-padding-large: 6px 15px 6px 15px;
-$btn-padding-base-icon: 5px 15px 6px;
+$btn-padding-large: 5px 15px 7px 15px;
+$btn-padding-base-icon: 4px 15px 7px;
 $btn-padding-small-icon: 1px 7px 2px;
-$btn-padding-large-icon: 6px 15px 6px 15px;
+$btn-padding-large-icon: 5px 15px 7px 15px;
 $btn-font-size: 12px;
 $btn-font-size-large: 14px;
 $btn-border-radius: 4px;

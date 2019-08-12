@@ -1,0 +1,16 @@
+// Loading for loop
+@keyframes vu-load-loop {
+  from {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.vu-load-loop {
+  animation: vu-load-loop 1s linear infinite;
+}

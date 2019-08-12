@@ -3,11 +3,13 @@
   font-size: $font-size;
   border-radius: $border-radius;
 }
+
 @mixin btn-color($color, $bg, $border) {
   color: $color;
   background-color: $bg;
   border-color: $border;
 }
+
 @mixin btn-variant($color, $bg, $border) {
   @include btn-color($color, $bg, $border);
 
@@ -36,7 +38,17 @@
   }
 }
 
-@mixin btn() {
+@mixin btn-fix-color($color) {
+  @include btn-variant($btn-primary-color, $color, $color);
+
+  &:hover,
+  &:active,
+  &.active {
+    color: $btn-primary-color;
+  }
+}
+
+@mixin btn($btnPrefix) {
   display: inline-block;
   margin: 0;
   font-weight: $btn-font-weight;
@@ -63,23 +75,55 @@
   &[disabled] {
     cursor: $cursor-disabled;
   }
-
   &:not([disabled]):hover {
     text-decoration: none;
   }
-
   &:not([disabled]):active {
     outline: 0;
     // transition: none;
   }
 
-  // &-large {
-  //   @include btn-size(
-  //     $btn-padding-large,
-  //     $btn-font-size-large,
-  //     $btn-border-radius
-  //   );
-  // }
+  // size
+  &-long {
+    width: 100%;
+  }
+  &-large {
+    @include btn-size(
+      $btn-padding-large,
+      $btn-font-size-large,
+      $btn-border-radius
+    );
+  }
+  &-small {
+    @include btn-size(
+      $btn-padding-small,
+      $btn-font-size,
+      $btn-border-radius-small
+    );
+  }
+
+  // 只有一个图标时（不一定是圆图标）
+  &-icon-only {
+    @include btn-size(
+      $btn-padding-base-icon,
+      $btn-font-size,
+      $btn-border-radius
+    );
+    &.#{$btnPrefix}-large {
+      @include btn-size(
+        $btn-padding-large-icon,
+        $btn-font-size-large,
+        $btn-border-radius
+      );
+    }
+    &.#{$btnPrefix}-small {
+      @include btn-size(
+        $btn-padding-small-icon,
+        $btn-font-size,
+        $btn-border-radius-small
+      );
+    }
+  }
 }
 
 @mixin btn-default() {
@@ -104,22 +148,13 @@
     );
   }
 }
+
 @mixin btn-primary() {
   @include btn-variant(
     $btn-primary-color,
     $btn-primary-bg,
     $btn-primary-border
   );
-  &:hover,
-  &:active,
-  &.active {
-    color: $btn-primary-color;
-  }
-}
-
-@mixin btn-fix-color($color) {
-  @include btn-variant($btn-primary-color, $color, $color);
-
   &:hover,
   &:active,
   &.active {
@@ -137,16 +172,49 @@
     &:focus,
     &:active,
     &.active {
-      @include btn-color($btn-disable-color, $text-color, transparent);
+      @include btn-color($btn-disable-color, transparent, transparent);
     }
   }
 
   &:hover {
-    @include btn-color(tint($primary-color, 20%), $btn-ghost-bg, transparent);
+    @include btn-color(tint($primary-color, 20%), transparent, transparent);
   }
 
   &:active,
   &.active {
-    @include btn-color(shade($primary-color, 5%), $btn-ghost-bg, transparent);
+    @include btn-color(shade($primary-color, 5%), transparent, transparent);
+  }
+}
+
+@mixin btn-ghost($color) {
+  color: $color;
+  &:hover {
+    color: tint($color, 20%);
+    background: fade(tint($color, 95%), 50%);
+  }
+}
+
+@mixin btn-circle($btnPrefix) {
+  border-radius: $btn-circle-size;
+
+  &.#{$btnPrefix}-large {
+    border-radius: $btn-circle-size-large;
+  }
+  &.#{$btnPrefix}-small {
+    border-radius: $btn-circle-size-small;
+  }
+  // 仅有圆形图标
+  &.#{$btnPrefix}-icon-only {
+    @include square($btn-circle-size);
+    @include btn-size(0, $font-size-base + 2, 50%);
+    line-height: $font-size-small;
+    &.#{$btnPrefix}-large {
+      @include square($btn-circle-size-large);
+      @include btn-size(0, $font-size-large + 2, 50%);
+    }
+    &.#{$btnPrefix}-small {
+      @include square($btn-circle-size-small);
+      @include btn-size(0, $font-size-small + 2, 50%);
+    }
   }
 }

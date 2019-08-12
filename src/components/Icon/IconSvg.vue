@@ -1,6 +1,6 @@
 <template>
   <span :class="classes" :style="styles" @click="handleClick">
-    <svg aria-hidden="true" :fill="color">
+    <svg aria-hidden="true" fill="currentColor">
       <use :xlink:href="iconName" />
     </svg>
   </span>
@@ -15,7 +15,10 @@ export default {
       type: String,
       required: true,
     },
-    size: String,
+    size: {
+      type: String,
+      default: 'inherit',
+    },
     color: {
       type: String,
       default: 'currentColor',
@@ -26,10 +29,10 @@ export default {
       return [`${prefixCls}`]
     },
     styles() {
+      const { size, color } = this
       return {
-        width: this.size,
-        height: this.size,
-        color: this.color,
+        fontSize: size,
+        color,
       }
     },
     iconName() {
@@ -48,12 +51,13 @@ export default {
 .icon-svg {
   display: inline-block;
   vertical-align: middle;
-  width: $font-size-base;
-  height: $font-size-base;
+  line-height: 1;
 
   svg {
-    width: 100%;
-    height: 100%;
+    width: 1em;
+    height: 1em;
+    color: currentColor;
+    font-size: inherit;
     vertical-align: top;
     overflow: hidden;
     text-rendering: optimizeLegibility;

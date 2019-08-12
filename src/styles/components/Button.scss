@@ -1,8 +1,15 @@
 $prefixCls: $css-prefix + 'btn';
 
 .#{$prefixCls} {
-  @include btn();
+  @include btn($btnPrefix: $prefixCls);
 
+  & .icon-svg + span,
+  & .icon-png + span,
+  & span + .icon-svg,
+  & span + .icon-png {
+    margin-left: 4px;
+  }
+  // 类型
   &-default {
     @include btn-default();
   }
@@ -23,5 +30,59 @@ $prefixCls: $css-prefix + 'btn';
   }
   &-text {
     @include btn-text();
+  }
+
+  // 幽灵按钮
+  &-ghost {
+    color: #fff;
+    background: transparent;
+    &:hover {
+      background: transparent;
+    }
+
+    &.#{$prefixCls}-default {
+      color: $white;
+      border-color: $white;
+      &:hover {
+        color: shade($primary-color, 20%);
+        border-color: shade($primary-color, 20%);
+      }
+    }
+
+    &.#{$prefixCls}-primary {
+      color: shade($primary-color, 20%);
+      border-color: shade($primary-color, 20%);
+      &:hover {
+        color: $primary-color;
+        border-color: $primary-color;
+        background: fade(tint($primary-color, 95%), 50%);
+      }
+    }
+
+    &.#{$prefixCls}-info {
+      @include btn-ghost($info-color);
+    }
+    &.#{$prefixCls}-success {
+      @include btn-ghost($success-color);
+    }
+    &.#{$prefixCls}-warning {
+      @include btn-ghost($warning-color);
+    }
+    &.#{$prefixCls}-error {
+      @include btn-ghost($error-color);
+    }
+    &.#{$prefixCls}-text {
+      color: $white;
+      &:hover {
+        color: shade($primary-color, 20%);
+      }
+    }
+  }
+
+  &-circle {
+    @include btn-circle($btnPrefix: $prefixCls);
+  }
+  &-square {
+    border-radius: 0px;
   }
 }
