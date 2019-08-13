@@ -50,7 +50,7 @@ export default {
 <style lang="scss">
 .icon-svg {
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: -0.05em;
   line-height: 1;
 
   svg {

@@ -1,33 +1,45 @@
 <template>
   <div class="user-info-bar">
     <div class="inner">
-      <div>
-        <router-link to="#" class="primary">首页</router-link>
-        <router-link to="#" class="primary">登陆</router-link>
-        <router-link to="#">注册</router-link>
-        <router-link to="#">消息</router-link>
+      <div class="link-list">
+        <div class="link-item">
+          <router-link to="#" class="primary">首页</router-link>
+        </div>
+        <div class="link-item">
+          <router-link to="#" class="primary">登陆</router-link>
+        </div>
+        <div class="link-item">
+          <router-link to="#">注册</router-link>
+        </div>
+        <div class="link-item">
+          <router-link to="#">消息</router-link>
+        </div>
       </div>
-      <div>
-        <router-link to="#">我的购物车(0)</router-link>
-        <router-link to="#">
-          我的订单
-          <Icon type="down" />
-        </router-link>
-        <router-link to="#">
-          客服中心
-          <Icon type="down" />
-        </router-link>
-        <router-link to="#"> <Icon type="mobile" />手机版 </router-link>
-        <!-- <router-link to="#">
-          <Button
-            type="primary"
-            size="mini"
-            right-icon="circle-o-right"
-            icon-size="15"
-            round
-            >综合办公室</Button
-          >
-        </router-link>-->
+      <div class="link-list">
+        <div class="link-item">
+          <router-link to="#">我的购物车(0)</router-link>
+        </div>
+        <div class="link-item">
+          <router-link to="#">
+            我的订单
+            <Icon type="down" />
+          </router-link>
+        </div>
+        <div class="link-item">
+          <router-link to="#">
+            客服中心
+            <Icon type="down" />
+          </router-link>
+        </div>
+        <div class="link-item">
+          <router-link to="#"> <Icon type="mobile" />手机版 </router-link>
+        </div>
+        <div class="link-item">
+          <Button to="#" type="primary" size="small" shape="circle">
+            <span>综合办公室</span>
+            <Icon type="circle-o-right" size="14px" />
+          </Button>
+        </div>
       </div>
     </div>
   </div>
@@ -39,7 +51,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .user-info-bar {
   height: 36px;
   line-height: 36px;
@@ -50,20 +62,28 @@ export default {
     justify-content: space-between;
     margin: auto;
     width: $screen-xl;
-    a {
-      color: $normal-color;
-      &.primary {
-        color: $primary-color;
-      }
-      &:not(:first-child):before {
-        content: '|';
-        margin: 0 8px;
+
+    .link-list {
+      .link-item {
+        display: inline-block;
+        &:not(:first-child):before {
+          content: '|';
+          color: $border-color-split;
+          margin: 0 8px;
+        }
+
+        a {
+          color: $normal-color;
+        }
+        .primary {
+          color: $primary-color;
+        }
+        .vu-btn {
+          color: #fff;
+          vertical-align: 0.05em;
+        }
       }
     }
-
-    //     .icon-svg {
-    //       margin-top: 0.15em;
-    //     }
   }
 }
 </style>

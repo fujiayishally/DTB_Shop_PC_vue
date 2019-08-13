@@ -43,6 +43,6 @@ export default {
 <style lang="scss">
 .icon-png {
   display: inline-block;
-  vertical-align: top;
+  vertical-align: middle;
 }
 </style>

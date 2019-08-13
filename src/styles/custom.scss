@@ -32,7 +32,8 @@ $black: #000;
 // base
 $body-background: #fff;
 $component-background: #fff;
-$font-family: "微软雅黑, -apple-system, Helvetica, PingFangSC-Regular,'Source Han Sans";
+$font-family: '微软雅黑', '-apple-system', Helvetica, 'PingFangSC-Regular',
+  'Source Han Sans';
 $text-color: #17233d;
 $text-color-secondary: fade($black, 45%);
 $heading-color: fade(#000, 85%);
@@ -79,10 +80,10 @@ $shadow-base: $shadow-down;
 // Button
 $btn-font-weight: normal;
 $btn-padding-base: 4px 15px 7px;
-$btn-padding-small: 1px 7px 2px;
+$btn-padding-small: 1px 7px 3px;
 $btn-padding-large: 5px 15px 7px 15px;
 $btn-padding-base-icon: 4px 15px 7px;
-$btn-padding-small-icon: 1px 7px 2px;
+$btn-padding-small-icon: 1px 7px 3px;
 $btn-padding-large-icon: 5px 15px 7px 15px;
 $btn-font-size: 12px;
 $btn-font-size-large: 14px;

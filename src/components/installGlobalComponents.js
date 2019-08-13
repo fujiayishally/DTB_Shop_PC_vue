@@ -7,7 +7,6 @@ const globalComponents = {
 }
 
 const install = function(Vue) {
-  //   if (install.installed) return
   Object.keys(globalComponents).forEach(key => {
     Vue.component(key, globalComponents[key])
   })
