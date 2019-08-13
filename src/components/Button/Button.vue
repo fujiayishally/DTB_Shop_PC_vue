@@ -95,7 +95,7 @@ export default {
           [`${prefixCls}-ghost`]: this.ghost,
           [`${prefixCls}-long`]: this.long,
           [`${prefixCls}-icon-only`]: !this.showSlot,
-          [`${prefixCls}-loading`]: !this.loading,
+          [`${prefixCls}-loading`]: this.loading,
           [`${prefixCls}-${this.size}`]: this.size !== 'default',
           [`${prefixCls}-${this.shape}`]: this.shape !== 'default',
         },

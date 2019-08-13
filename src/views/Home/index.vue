@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import example from '@/components/Button/example'
+import example from '@/components/Dropdown/example'
 
 export default {
   name: 'Home',

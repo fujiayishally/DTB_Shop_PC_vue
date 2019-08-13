@@ -1,0 +1,20 @@
+@mixin dropdown-item($dropdownCls, $itemCls) {
+  .#{$itemCls} {
+    margin: 0;
+    padding: 7px 16px;
+    color: $text-color;
+    font-size: $font-size-small;
+    white-space: nowrap;
+    list-style: none;
+    cursor: pointer;
+    transition: background $transition-time $ease-in-out;
+
+    &:hover {
+      background: $background-color-select-hover;
+    }
+    &-disalbed {
+      color: $btn-disable-color;
+      cursor: $cursor-disabled;
+    }
+  }
+}

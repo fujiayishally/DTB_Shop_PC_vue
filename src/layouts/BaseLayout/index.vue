@@ -2,7 +2,7 @@
   <div class="base-layout">
     <BannerVue :src="bannerImg" />
     <HeaderVue />
-    <!-- <router-view></router-view> -->
+    <router-view></router-view>
     <FooterVue />
   </div>
 </template>

@@ -1,0 +1,18 @@
+$dropdownPrefixCls: $css-prefix + 'dropdown';
+$dropdownItemPrefixCls: $dropdownPrefixCls + '-item';
+
+.#{$dropdownPrefixCls} {
+  display: inline-block;
+
+  &-rel {
+    position: relative;
+  }
+  &-menu {
+    min-width: 100px;
+  }
+
+  &-item {
+  }
+}
+
+@include dropdown-item($dropdownPrefixCls, $dropdownItemPrefixCls);
