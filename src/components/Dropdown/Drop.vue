@@ -29,6 +29,7 @@ export default {
     return {
       transferIndex,
       popperStatus: false,
+      width: '',
     }
   },
   computed: {
@@ -36,7 +37,11 @@ export default {
       return [`${prefixCls}`]
     },
     styles() {
-      return {}
+      const { transfer, transferIndex, width } = this
+      let styles = {}
+      if (width) styles['min-width'] = `${width}px`
+      if (transfer) styles['z-index'] = 1060 + transferIndex
+      return styles
     },
   },
   methods: {
@@ -74,7 +79,7 @@ export default {
           this.popperStatus = false
           setTimeout(() => {
             this.popper.destroy()
-            // this.popper = null
+            this.popper = null
           }, 300)
         }
       }

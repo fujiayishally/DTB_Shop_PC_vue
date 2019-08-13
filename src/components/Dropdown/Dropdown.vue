@@ -4,21 +4,31 @@
       <slot></slot>
     </div>
 
-    <Drop ref="drop" :class="dropClasses" v-show="currentVisible">
-      <slot name="list"></slot>
-    </Drop>
+    <transition name="transition-drop">
+      <Drop
+        ref="drop"
+        :class="dropClasses"
+        v-show="currentVisible"
+        :transfer="transfer"
+        :data-transfer="transfer"
+        v-transfer-dom
+      >
+        <slot name="list"></slot>
+      </Drop>
+    </transition>
   </div>
 </template>
 
 <script>
 import Drop from './Drop'
 import { findComponentUpward } from '@/utils/assist'
-
+import TransferDom from '@/directives/TransferDom'
 const prefixCls = 'vu-dropdown'
 
 export default {
   name: 'Dropdown',
   components: { Drop },
+  directives: { TransferDom },
   props: {
     placement: {
       // 下拉菜单出现的位置
@@ -54,14 +64,18 @@ export default {
       type: Boolean,
       default: false,
     },
+    stopPropagation: {
+      type: Boolean,
+      default: false,
+    },
+    transfer: {
+      type: Boolean,
+      default: false,
+    },
     transferClassName: {
       // 开启 transfer 时，给浮层添加额外的 class 名称
       type: String,
       default: '',
-    },
-    stopPropagation: {
-      type: Boolean,
-      default: false,
     },
   },
   data() {
@@ -87,7 +101,10 @@ export default {
       return [`${prefixCls}-rel`]
     },
     dropClasses() {
-      return []
+      return {
+        [`${prefixCls}-transfer`]: this.transfer,
+        [this.transferClassName]: this.transferClassName,
+      }
     },
   },
   methods: {
