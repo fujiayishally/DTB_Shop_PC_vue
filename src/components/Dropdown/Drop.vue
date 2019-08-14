@@ -69,7 +69,6 @@ export default {
             },
             onUpdate: data => {
               this.resetTransformOrigin(data)
-              console.log('onUpdated', data)
             },
           })
         })

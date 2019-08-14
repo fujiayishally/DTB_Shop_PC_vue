@@ -1,9 +1,18 @@
 <template>
-  <div :class="classes">
-    <div ref="reference" :class="refClasses" @click="handleClick">
+  <div
+    :class="classes"
+    @mouseenter="handleMouseenter"
+    @mouseleave="handleMouseleave"
+    v-click-outside="handleClickOutside"
+  >
+    <div
+      ref="reference"
+      :class="refClasses"
+      @click="handleClick"
+      @contextmenu.prevent="handleRightClick"
+    >
       <slot></slot>
     </div>
-    <!-- transition-drop -->
     <transition name="transition-drop">
       <Drop
         ref="drop"
@@ -12,6 +21,8 @@
         :transfer="transfer"
         :data-transfer="transfer"
         v-transfer-dom
+        @mouseenter.native="handleMouseenter"
+        @mouseleave.native="handleMouseleave"
       >
         <slot name="list"></slot>
       </Drop>
@@ -23,12 +34,14 @@
 import Drop from './Drop'
 import { findComponentUpward } from '@/utils/assist'
 import TransferDom from '@/directives/TransferDom'
+import ClickOutside from '@/directives/ClickOutside'
+import { setTimeout, clearTimeout } from 'timers'
 const prefixCls = 'vu-dropdown'
 
 export default {
   name: 'Dropdown',
   components: { Drop },
-  directives: { TransferDom },
+  directives: { TransferDom, ClickOutside },
   props: {
     placement: {
       // 下拉菜单出现的位置
@@ -116,7 +129,41 @@ export default {
     handleClick() {
       const { trigger } = this
       if (trigger !== 'click') return false
+
       this.currentVisible = !this.currentVisible
+    },
+    handleMouseenter() {
+      const { trigger } = this
+      if (trigger !== 'hover') return false
+
+      if (this.timeout) clearTimeout(this.timeout)
+      this.timeout = setTimeout(() => {
+        this.currentVisible = true
+      }, 250)
+    },
+    handleMouseleave() {
+      const { trigger } = this
+      if (trigger !== 'hover') return false
+
+      if (this.timeout) {
+        clearTimeout(this.timeout)
+        this.timeout = setTimeout(() => {
+          this.currentVisible = false
+        }, 150)
+      }
+    },
+    handleRightClick() {
+      const { trigger } = this
+      if (trigger !== 'contextMenu') return false
+
+      this.currentVisible = !this.currentVisible
+    },
+    handleClickOutside(event) {
+      const { trigger } = this
+
+      if (trigger === 'custom' && this.currentVisible)
+        this.$emit('on-click-outside', event)
+      else this.currentVisible = false
     },
     hasParent() {
       return findComponentUpward(this, 'Dropdown')
@@ -140,9 +187,4 @@ export default {
 <style lang="scss">
 @import '@/styles/mixins/Dropdown.scss';
 @import '@/styles/components/Dropdown.scss';
-
-@keyframes vuTransitionDropIn {
-}
-.transition-drop-enter {
-}
 </style>
