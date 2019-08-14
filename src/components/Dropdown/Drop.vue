@@ -49,28 +49,31 @@ export default {
       if (this.popper) {
         this.$nextTick(() => {
           this.popper.update()
+          this.popperStatus = true
         })
       } else {
-        this.popper = new Popper(this.$parent.$refs.reference, this.$el, {
-          placement: this.placement,
-          modfiers: {
-            // computeStyle: { gpuAcceleration: true }, //如果为true，则使用CSS 3D转换来定位popper
-            // preventOverflow: {
-            //   boundariesElement: 'window', //定义popper位置边界的元素
-            // },
-          },
-          onCreate: data => {
-            console.log('onCreate', data)
-            this.resetTransformOrigin(data)
-            this.$nextTick(this.popper.update())
-          },
-          onUpdate: data => {
-            console.log('onUpdated', data)
-            this.resetTransformOrigin(data)
-          },
+        this.$nextTick(() => {
+          this.popper = new Popper(this.$parent.$refs.reference, this.$el, {
+            placement: this.placement,
+            modifiers: {
+              computeStyle: {
+                gpuAcceleration: false, //如果为true，则使用CSS 3D转换来定位popper
+              },
+              preventOverflow: {
+                boundariesElement: 'window', //定义popper位置边界的元素
+              },
+            },
+            onCreate: data => {
+              this.resetTransformOrigin(data)
+              this.$nextTick(this.popper.update())
+            },
+            onUpdate: data => {
+              this.resetTransformOrigin(data)
+              console.log('onUpdated', data)
+            },
+          })
         })
       }
-      this.popperStatus = true
       this.transferIndex = this.getTransferIndex
     },
     destroy() {
@@ -84,26 +87,36 @@ export default {
         }
       }
     },
-    resetTransformOrigin() {
-      // placement = placement.match(/(\w*)-(\w*)/)
-      // let start = placement[1]
-      // let end = placement[2]
-      // styles.resetTransformOrigin =
-      // console.log(start, end)
-      // let x_placement = this.popper.
+    resetTransformOrigin({ attributes }) {
+      const placement = attributes['x-placement']
+
+      if (placement === 'left' || placement === 'right') return
+      let transformOrigin = ''
+      switch (placement) {
+        case 'top':
+        case 'top-start':
+        case 'top-end':
+        case 'left-end':
+        case 'right-end':
+          transformOrigin = 'center bottom'
+          break
+        default:
+          transformOrigin = 'center top'
+      }
+      this.popper.popper.style.transformOrigin = transformOrigin
     },
     getTransferIndex() {
       return transferIncrease()
     },
   },
   created() {
-    // this.update()
-    // this.$on('on-update-popper', this.update)
+    this.$on('on-update-popper', this.update)
+    this.$on('on-destroy-popper', this.destroy)
   },
-  mounted() {
-    // this.update()
+
+  beforDestroy() {
+    if (this.popper) this.popper.destroy()
   },
-  beforDestroy() {},
 }
 </script>
 

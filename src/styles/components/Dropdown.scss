@@ -10,8 +10,8 @@ $dropdownItemPrefixCls: $dropdownPrefixCls + '-item';
   &-menu {
     min-width: 100px;
   }
-
-  &-item {
+  &-transfer {
+    width: auto;
   }
 }
 

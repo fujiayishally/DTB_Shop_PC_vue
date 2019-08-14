@@ -1,0 +1,38 @@
+@keyframes vuTransitionDropIn {
+  0% {
+    opacity: 0;
+    transform: scaleY(0.8);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes vuTransitionDropOut {
+  0% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scaleY(0.8);
+  }
+}
+
+@mixin slide-motion($clsName, $keyframeName) {
+  @include make-motion($clsName, $keyframeName);
+
+  .#{$clsName}-enter-active,
+  .#{$clsName}-appear {
+    opacity: 0;
+    animation-timing-function: $ease-in-out;
+  }
+  .#{$clsName}-leave-active {
+    animation-timing-function: $ease-in-out;
+  }
+}
+
+@include slide-motion('transition-drop', 'vuTransitionDrop');

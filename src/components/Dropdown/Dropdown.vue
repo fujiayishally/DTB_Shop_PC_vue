@@ -3,7 +3,7 @@
     <div ref="reference" :class="refClasses" @click="handleClick">
       <slot></slot>
     </div>
-
+    <!-- transition-drop -->
     <transition name="transition-drop">
       <Drop
         ref="drop"
@@ -106,6 +106,11 @@ export default {
         [this.transferClassName]: this.transferClassName,
       }
     },
+    transition() {
+      return ['bottom-start', 'bottom', 'bottom-end'].includes(this.placement)
+        ? 'slide-up'
+        : 'fade'
+    },
   },
   methods: {
     handleClick() {
@@ -135,4 +140,9 @@ export default {
 <style lang="scss">
 @import '@/styles/mixins/Dropdown.scss';
 @import '@/styles/components/Dropdown.scss';
+
+@keyframes vuTransitionDropIn {
+}
+.transition-drop-enter {
+}
 </style>

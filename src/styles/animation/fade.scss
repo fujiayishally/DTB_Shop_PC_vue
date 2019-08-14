@@ -1,0 +1,33 @@
+@keyframes vuFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes vuFadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@mixin fade-motion($clsName, $keyframeName) {
+  @include make-motion($clsName, $keyframeName);
+
+  .#{$clsName}-enter-active,
+  .#{$clsName}-enter-appear {
+    opacity: 0;
+    animation-timing-function: linear;
+  }
+
+  .#{$clsName}-leave-active {
+    animation-timing-function: linear;
+  }
+}
+
+@include fade-motion('fade', 'vuFade');

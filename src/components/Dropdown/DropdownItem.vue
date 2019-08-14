@@ -35,7 +35,13 @@ export default {
   },
   computed: {
     classes() {
-      return [`${prefixCls}`]
+      return [
+        `${prefixCls}`,
+        {
+          [`${prefixCls}-disabled`]: this.disabled,
+          [`${prefixCls}-divided`]: this.divided,
+        },
+      ]
     },
   },
   methods: {

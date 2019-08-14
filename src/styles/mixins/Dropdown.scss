@@ -9,12 +9,32 @@
     cursor: pointer;
     transition: background $transition-time $ease-in-out;
 
-    &:hover {
+    &:hover,
+    &:focus {
       background: $background-color-select-hover;
     }
-    &-disalbed {
+
+    &-disabled {
       color: $btn-disable-color;
       cursor: $cursor-disabled;
+      &:hover {
+        color: $btn-disable-color;
+        background: #fff;
+        cursor: $cursor-disabled;
+      }
+    }
+    &-divided {
+      margin-top: 5px;
+      border-top: 1px solid $border-color-split;
+      &:before {
+        content: '';
+        height: 5px;
+        display: block;
+        margin: 0 -16px;
+        background-color: #fff;
+        position: relative;
+        top: -7px;
+      }
     }
   }
 }
