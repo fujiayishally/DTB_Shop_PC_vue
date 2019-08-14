@@ -19,13 +19,12 @@ export default {
       type: Boolean,
       default: false,
     },
-    divided: {
-      // 显示分割线
+    selected: {
       type: Boolean,
       default: false,
     },
-    selected: {
-      // 标记该项为选中状态
+    divided: {
+      // 显示分割线
       type: Boolean,
       default: false,
     },
@@ -40,22 +39,24 @@ export default {
         {
           [`${prefixCls}-disabled`]: this.disabled,
           [`${prefixCls}-divided`]: this.divided,
+          [`${prefixCls}-selected`]: this.selected,
         },
       ]
     },
   },
   methods: {
     handleClick() {
-      // const { disabled, divided, selected } = this
       const dropdown = findComponentUpward(this, 'Dropdown')
-      // const hasChildren = this.$parent &&
-      if (!dropdown) return
 
-      // if (disabled) {
-      //   console.log('item disabled')
-      // } else {
-      //   this.$emit('on-update-poper')
-      // }
+      if (this.disabled) {
+        this.$nextTick(() => {
+          dropdown.currentVisible = true
+        })
+      } else if (dropdown === this.$parent) {
+        dropdown.$emit('on-haschild-click')
+      } else {
+        if (dropdown) dropdown.$emit('on-hover-click')
+      }
       dropdown.$emit('on-click', this.name)
     },
   },

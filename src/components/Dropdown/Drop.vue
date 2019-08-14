@@ -1,6 +1,7 @@
 <template>
   <div :class="classes" :style="styles">
     <slot></slot>
+    <span :class="arrowClasses" ref="arrow"></span>
   </div>
 </template>
 
@@ -14,9 +15,22 @@ export default {
   props: {
     placement: {
       type: String,
-      default: 'bottom-start',
+      default: 'bottom',
       validator(value) {
-        return ['bottom-start'].includes(value)
+        return [
+          'top',
+          'top-start',
+          'top-end',
+          'bottom',
+          'bottom-start',
+          'bottom-end',
+          'left',
+          'left-start',
+          'left-end',
+          'right',
+          'right-start',
+          'right-end',
+        ].includes(value)
       },
     },
     transfer: {
@@ -36,6 +50,9 @@ export default {
     classes() {
       return [`${prefixCls}`]
     },
+    arrowClasses() {
+      return [`${prefixCls}-arrow`]
+    },
     styles() {
       const { transfer, transferIndex, width } = this
       let styles = {}
@@ -53,6 +70,7 @@ export default {
         })
       } else {
         this.$nextTick(() => {
+          console.log(this.$refs.arrow)
           this.popper = new Popper(this.$parent.$refs.reference, this.$el, {
             placement: this.placement,
             modifiers: {
@@ -62,8 +80,12 @@ export default {
               preventOverflow: {
                 boundariesElement: 'window', //定义popper位置边界的元素
               },
+              arrow: {
+                element: this.$refs.arrow,
+              },
             },
             onCreate: data => {
+              console.log('crate', data)
               this.resetTransformOrigin(data)
               this.$nextTick(this.popper.update())
             },
@@ -120,5 +142,6 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/styles/mixins/Drop.scss';
 @import '@/styles/components/Drop.scss';
 </style>

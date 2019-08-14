@@ -1,0 +1,50 @@
+@mixin drop-arrow($dropClsName, $arrowClsName, $width, $popper-bg) {
+  .#{$arrowClsName} {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    position: absolute;
+    margin: $width;
+  }
+
+  &[x-placement^='top'] {
+    margin-bottom: $width;
+    .#{$arrowClsName} {
+      border-width: $width $width 0 $width;
+      border-color: $popper-bg transparent transparent transparent;
+      bottom: -$width;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+  &[x-placement^='bottom'] {
+    margin-top: $width;
+    .#{$arrowClsName} {
+      border-width: 0 $width $width $width;
+      border-color: transparent transparent $popper-bg transparent;
+      top: -$width;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+  &[x-placement^='right'] {
+    margin-left: $width;
+    .#{$arrowClsName} {
+      border-width: $width $width $width 0;
+      border-color: transparent $popper-bg transparent transparent;
+      top: calc(50% - $width);
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+  &[x-placement^='left'] {
+    margin-right: $width;
+    #{$arrowClsName} {
+      border-width: $width 0 $width $width;
+      border-color: transparent transparent transparent $popper-bg;
+      top: calc(50% - $width);
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+}

@@ -18,6 +18,7 @@
         ref="drop"
         :class="dropClasses"
         v-show="currentVisible"
+        :placement="placement"
         :transfer="transfer"
         :data-transfer="transfer"
         v-transfer-dom
@@ -175,10 +176,25 @@ export default {
       const $parent = this.hasParent()
       if ($parent) $parent.$emit('on-cllick', name)
     })
-    this.$on('on-hover-click', name => {
-      if (this.stopPropagation) return
+
+    this.$on('on-haschild-click', () => {
+      this.$nextTick(() => {
+        if (this.trigger === 'custom') return false
+        this.currentVisible = true
+      })
+
       const $parent = this.hasParent()
-      if ($parent) $parent.$emit('on-cllick', name)
+      if ($parent) $parent.$emit('on-haschild-click')
+    })
+
+    this.$on('on-hover-click', () => {
+      this.$nextTick(() => {
+        if (this.trigger === 'custom') return false
+        this.currentVisible = false
+      })
+
+      const $parent = this.hasParent()
+      if ($parent) $parent.$emit('on-hover-click')
     })
   },
 }

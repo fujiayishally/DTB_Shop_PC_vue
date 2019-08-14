@@ -4,6 +4,9 @@ $dropdownItemPrefixCls: $dropdownPrefixCls + '-item';
 .#{$dropdownPrefixCls} {
   display: inline-block;
 
+  .#{$dropdownPrefixCls} {
+    width: 100%;
+  }
   &-rel {
     position: relative;
   }

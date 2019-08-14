@@ -1,7 +1,6 @@
 const clickOutside = {
   bind(el, binding) {
     function clickHandler(event) {
-      console.log(el.contains(event.target))
       if (el.contains(event.target)) {
         return false
       }

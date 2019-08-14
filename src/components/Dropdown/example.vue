@@ -79,6 +79,99 @@
         </DropdownMenu>
       </Dropdown>
     </div>
+
+    <div class="demo">
+      <p>对齐方向</p>
+      <Dropdown placement="bottom-start">
+        <Button type="info">
+          bottom-start(左)
+          <Icon type="down"></Icon>
+        </Button>
+        <DropdownMenu slot="list">
+          <DropdownItem>驴打滚</DropdownItem>
+          <DropdownItem>炸酱面</DropdownItem>
+          <DropdownItem>豆汁儿</DropdownItem>
+          <DropdownItem>冰糖葫芦</DropdownItem>
+          <DropdownItem>北京烤鸭</DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+      <Dropdown>
+        <Button type="info">
+          默认bottom(居中)
+          <Icon type="down"></Icon>
+        </Button>
+        <DropdownMenu slot="list">
+          <DropdownItem>驴打滚</DropdownItem>
+          <DropdownItem>炸酱面</DropdownItem>
+          <DropdownItem>豆汁儿</DropdownItem>
+          <DropdownItem>冰糖葫芦</DropdownItem>
+          <DropdownItem>北京烤鸭</DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+      <Dropdown placement="bottom-end">
+        <Button type="info">
+          bottom-end(右)
+          <Icon type="down"></Icon>
+        </Button>
+        <DropdownMenu slot="list">
+          <DropdownItem>驴打滚</DropdownItem>
+          <DropdownItem>炸酱面</DropdownItem>
+          <DropdownItem>豆汁儿</DropdownItem>
+          <DropdownItem>冰糖葫芦</DropdownItem>
+          <DropdownItem>北京烤鸭</DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+    </div>
+
+    <div class="demo">
+      <p>嵌套用法</p>
+      <Dropdown>
+        <Button type="info">
+          北京小吃
+          <Icon type="down"></Icon>
+        </Button>
+        <DropdownMenu slot="list">
+          <DropdownItem>驴打滚</DropdownItem>
+          <DropdownItem>炸酱面</DropdownItem>
+          <DropdownItem>豆汁儿</DropdownItem>
+          <Dropdown placement="right-start">
+            <DropdownItem>
+              北京烤鸭
+              <Icon type="right"></Icon>
+            </DropdownItem>
+            <DropdownMenu slot="list">
+              <DropdownItem>挂炉烤鸭</DropdownItem>
+              <DropdownItem>焖炉烤鸭</DropdownItem>
+              <Dropdown placement="right-start">
+                <DropdownItem>
+                  北京烤鸭
+                  <Icon type="right"></Icon>
+                </DropdownItem>
+                <DropdownMenu slot="list">
+                  <DropdownItem>挂炉烤鸭</DropdownItem>
+                  <DropdownItem>焖炉烤鸭</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </DropdownMenu>
+          </Dropdown>
+          <DropdownItem>冰糖葫芦</DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+    </div>
+
+    <div class="demo">
+      <p>带箭头</p>
+      <Dropdown trigger="click">
+        <Button type="info">
+          click 触发
+          <Icon type="down"></Icon>
+        </Button>
+        <DropdownMenu slot="list">
+          <DropdownItem>驴打滚</DropdownItem>
+          <DropdownItem>炸酱面</DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+    </div>
   </div>
 </template>
 
@@ -112,7 +205,7 @@ export default {
   box-shadow: 0 0 5px #ccc;
   border-radius: 5px;
 
-  .vu-dropdown {
+  & > .vu-dropdown {
     margin-right: 10px;
   }
 }
