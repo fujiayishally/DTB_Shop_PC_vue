@@ -4,7 +4,7 @@ function home(req) {
   let result = null
   switch (req.method) {
     case 'GET':
-      result = readJsonFrom('./data/HomeBaseData.json')
+      result = readJsonFrom('./data/homedata.json')
       break
     default:
       result = {

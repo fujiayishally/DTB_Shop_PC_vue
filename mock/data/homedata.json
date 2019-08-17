@@ -1,5 +1,15 @@
 {
   "bannerImg": "https://dtb315.com/Static//pc/home/images/index/index/header-banner.jpg?v=2h4o38",
+  "menuLinks": [
+    { "text": "特惠商城", "href": "#" },
+    { "text": "创客商城", "href": "#" },
+    { "text": "VIP商城", "href": "#" },
+    { "text": "积分商城", "href": "#" },
+    { "text": "特惠商城", "href": "#" },
+    { "text": "专区精选", "href": "#" },
+    { "text": "3A精品", "href": "#" },
+    { "text": "创富项目", "href": "#" }
+  ],
   "menuTree": [
     {
       "text": "食品饮品",
@@ -2007,6 +2017,16 @@
           ]
         }
       ]
+    }
+  ],
+  "Swipers": [
+    {
+      "img": "https://image.dtb315.com/6659573.jpg",
+      "bg": "#E5E8EB"
+    },
+    {
+      "img": "https://image.dtb315.com/6729898.jpg",
+      "bg": "#F2D8B5"
     }
   ],
   "consults": [

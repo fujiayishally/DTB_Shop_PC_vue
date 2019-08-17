@@ -172,12 +172,6 @@ export default {
   .inner {
     width: $screen-xl;
     margin: auto;
-    a {
-      color: $text-color;
-      &:hover {
-        color: $primary-color;
-      }
-    }
   }
 }
 </style>

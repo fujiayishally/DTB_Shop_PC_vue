@@ -1,6 +1,6 @@
 <template>
   <div class="base-layout">
-    <BannerVue :src="bannerImg" />
+    <BannerVue v-if="bannerImg" :src="bannerImg" />
     <HeaderVue />
     <router-view></router-view>
     <FooterVue />
@@ -19,20 +19,6 @@ export default {
     return {
       bannerImg: '',
     }
-  },
-  mounted() {
-    this.getHomeData()
-  },
-  methods: {
-    getHomeData() {
-      this.$http({
-        url: '/api/home',
-        method: 'GET',
-      }).then(res => {
-        const resData = res.data
-        this.bannerImg = resData.bannerImg
-      })
-    },
   },
 }
 </script>

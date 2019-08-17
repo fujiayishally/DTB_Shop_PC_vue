@@ -1,0 +1,31 @@
+$prefixCls: $css-prefix + 'carousel';
+$itemPrefixCls: $prefixCls + '-item';
+$dotsPrefixCls: $prefixCls + '-dots';
+$arrowPrefixCls: $prefixCls + '-arrow';
+
+.#{$prefixCls} {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  user-select: none;
+  touch-action: pan-y;
+
+  &-list {
+    position: relative;
+    display: block;
+    overflow: hidden;
+  }
+
+  &-track {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    z-index: 1;
+    &.heigher{
+      z-index:2;
+    }
+  }
+}
+@include carousel-item($itemPrefixCls);
+@include carousel-dots($dotsPrefixCls);
+@include carousel-arrow($arrowPrefixCls, $prefixCls);

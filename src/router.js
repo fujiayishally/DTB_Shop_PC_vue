@@ -28,6 +28,12 @@ export default new Router({
           component: () =>
             import(/* webpackChunkName: "product" */ './views/Product'),
         },
+        {
+          path: '/example/:component',
+          name: 'example',
+          component: () =>
+            import(/* webpackChunkName: "product" */ './views/Example'),
+        },
       ],
     },
   ],

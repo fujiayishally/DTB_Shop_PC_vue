@@ -8,12 +8,12 @@
       </router-link>
     </div>
     <div class="search">aa</div>
-    <dir class="qrcode">
+    <div class="qrcode">
       <img
         src="https://dtb315.com/Static//public/images/dtb_home_page.png?v=182xir9"
       />
       <div>点击下载二维码</div>
-    </dir>
+    </div>
   </div>
 </template>
 
@@ -27,7 +27,8 @@ export default {}
   align-items: center;
   justify-content: space-between;
   width: $screen-xl;
-  margin: 20px auto;
+  margin: 0 auto;
+  padding: 20px 0;
   text-align: center;
   .logo {
     flex: 2;

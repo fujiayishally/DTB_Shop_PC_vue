@@ -20,16 +20,48 @@
           <router-link to="#">我的购物车(0)</router-link>
         </div>
         <div class="link-item">
-          <router-link to="#">
-            我的订单
-            <Icon type="down" />
-          </router-link>
+          <Dropdown class="dropdown">
+            <router-link to="#">
+              我的订单
+              <Icon type="down" />
+            </router-link>
+            <DropdownMenu slot="list">
+              <DropdownItem>
+                <router-link to="#">待付款</router-link>
+              </DropdownItem>
+              <DropdownItem divided>
+                <router-link to="#">待发货</router-link>
+              </DropdownItem>
+              <DropdownItem divided>
+                <router-link to="#">待收货</router-link>
+              </DropdownItem>
+              <DropdownItem divided>
+                <router-link to="#">已收货</router-link>
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
         </div>
         <div class="link-item">
-          <router-link to="#">
-            客服中心
-            <Icon type="down" />
-          </router-link>
+          <Dropdown class="dropdown">
+            <router-link to="#">
+              客服中心
+              <Icon type="down" />
+            </router-link>
+            <DropdownMenu slot="list">
+              <DropdownItem>
+                <router-link to="#">在线客服</router-link>
+              </DropdownItem>
+              <DropdownItem divided>
+                <router-link to="#">电话客服</router-link>
+              </DropdownItem>
+              <DropdownItem divided>
+                <router-link to="#">微信客服</router-link>
+              </DropdownItem>
+              <DropdownItem divided>
+                <router-link to="#">帮助中心</router-link>
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
         </div>
         <div class="link-item">
           <router-link to="#"> <Icon type="mobile" />手机版 </router-link>
@@ -62,6 +94,7 @@ export default {
     justify-content: space-between;
     margin: auto;
     width: $screen-xl;
+    color: $normal-color;
 
     .link-list {
       .link-item {
@@ -71,16 +104,27 @@ export default {
           color: $border-color-split;
           margin: 0 8px;
         }
-
-        a {
-          color: $normal-color;
-        }
         .primary {
           color: $primary-color;
         }
         .vu-btn {
           color: #fff;
           vertical-align: 0.05em;
+        }
+        .dropdown {
+          line-height: 1.5;
+          text-align: center;
+
+          .vu-drop {
+            color: #666;
+          }
+          .vu-dropdown-menu {
+            min-width: 90px;
+          }
+          .vu-dropdown-item:hover {
+            background: #fff;
+            color: $primary-color;
+          }
         }
       }
     }

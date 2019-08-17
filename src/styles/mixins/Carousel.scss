@@ -1,0 +1,114 @@
+@mixin carousel-item($prefixCls) {
+  .#{$prefixCls} {
+    float: left;
+  }
+}
+
+@mixin carousel-dots($prefixCls) {
+  .#{$prefixCls} {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    width: 100%;
+    height: 17px;
+    list-style: none;
+    z-index: $zindex-affix;
+
+    &-inside {
+      bottom: 3px;
+    }
+    &-outside {
+      bottom: -20px;
+    }
+
+    &-none {
+      display: none;
+    }
+
+    & > li {
+      display: inline-block;
+      margin: 0 2px;
+      padding: 7px 0;
+      font-size: 0;
+      line-height: 0;
+      cursor: pointer;
+
+      &:hover > button {
+        opacity: 0.7;
+      }
+      &.#{$prefixCls}-active > button {
+        width: 24px;
+        opacity: 1;
+      }
+
+      & > button {
+        width: 16px;
+        height: 3px;
+        background: #8391a5;
+        border: none;
+        outline: none;
+        border-radius: 1px;
+        vertical-align: middle;
+        cursor: pointer;
+        opacity: 0.3;
+        transition: all 0.5s;
+
+        &.radius {
+          @include square(6px);
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}
+@mixin carousel-arrow($prefixCls, $parent) {
+  .#{$prefixCls} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-25%);
+    padding: 0;
+    margin: 0;
+    width: 40px;
+    height: 40px;
+    color: #fff;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 50%;
+    background: rgba(31, 45, 61, 0.11);
+    z-index: $zindex-affix;
+    cursor: pointer;
+    transition: $transition-time;
+
+    &:hover {
+      background-color: rgba(31, 45, 61, 0.3);
+    }
+    &:active,
+    &.active,
+    &:focus {
+      outline: none;
+      border: none;
+    }
+    &.left {
+      left: 8px;
+    }
+    &.right {
+      right: 8px;
+    }
+    &-always {
+      display: inline-block;
+    }
+    &-hover {
+      opacity: 0;
+    }
+    &-never {
+      display: none;
+    }
+  }
+  .#{$parent}:hover {
+    .#{$prefixCls}-hover {
+      opacity: 1;
+    }
+  }
+}

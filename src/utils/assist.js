@@ -110,6 +110,27 @@ function findBrothersComponents(context, componentName, exceptMe = true) {
   })
 }
 
+function cameCase(name) {
+  const reg = /(_|-)([a-z])/g
+  return name.replace(reg, g => g[1].toUpperCase())
+}
+
+function getStyle(element, styleName) {
+  if (!element || !styleName) return null
+
+  styleName = cameCase(styleName)
+  if (styleName === 'float') styleName = 'cssFloat'
+
+  try {
+    // defaultView用于获取document关联的window，Firefox3.6时，需要这样去获取window对象，才能使用其getComputedStyle方法
+    //getComputedStyle返回的style是一个实时的 CSSStyleDeclaration 对象
+    const computed = document.defaultView.getComputedStyle(element, '')
+    return element.style[styleName] || computed ? computed[styleName] : null
+  } catch (e) {
+    return element.style[styleName]
+  }
+}
+
 export {
   deepCopy,
   findComponentUpward,
@@ -117,4 +138,6 @@ export {
   findComponentDownward,
   findComponentsDownward,
   findBrothersComponents,
+  cameCase,
+  getStyle,
 }
