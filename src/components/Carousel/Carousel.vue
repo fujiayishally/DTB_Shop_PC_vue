@@ -189,7 +189,7 @@ export default {
         this.updateSlides(true)
         this.initCloneTrackValue()
         this.updateTrackSize()
-        this.updateTrackOffset
+        this.updateTrackOffset()
       })
     },
     initCloneTrackDom() {

@@ -51,6 +51,9 @@ export default {
   mounted() {
     this.$parent.slotChange()
   },
+  beforeDestroy() {
+    this.$parent.slotChange()
+  },
 }
 </script>
 
