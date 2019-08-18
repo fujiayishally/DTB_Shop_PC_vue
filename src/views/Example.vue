@@ -10,6 +10,7 @@ export default {
   components: {
     buttonExample: () => import(`../components/Button/example.vue`),
     carouselExample: () => import(`../components/Carousel/example.vue`),
+    counttoExample: () => import(`../components/CountTo/example.vue`),
   },
   data() {
     return {
