@@ -131,6 +131,9 @@ function getStyle(element, styleName) {
   }
 }
 
+function isNumber(val) {
+  return !isNaN(parseFloat(val))
+}
 export {
   deepCopy,
   findComponentUpward,
@@ -140,4 +143,5 @@ export {
   findBrothersComponents,
   cameCase,
   getStyle,
+  isNumber,
 }

@@ -1,18 +1,61 @@
 <template>
-  <div class="demo">
-    <CountTo
-      ref="countTo"
-      :start-val="1000"
-      :end-val="2019"
-      :decimals="2"
-      decimal="."
-      :duration="5000"
-      prefix="$"
-      suffix="rmb"
-    />
-    <button @click="start">开始</button>
-    <button @click="pause">{{ pausing ? '继续' : '暂停' }}</button>
-    <button @click="reset">重置</button>
+  <div>
+    <div class="demo">
+      <p>递增递减式改变</p>
+      <CountTo
+        ref="countTo"
+        :start-val="1000"
+        :end-val="2019"
+        :decimals="2"
+        decimal="."
+        :duration="3000"
+      >
+        <span slot="prefix">$</span>
+        <span slot="suffix">rmb</span>
+      </CountTo>
+      <div>
+        <button @click="start">开始</button>
+        <button @click="pause">{{ pausing ? '继续' : '暂停' }}</button>
+        <button @click="reset">重置</button>
+      </div>
+    </div>
+
+    <div class="demo">
+      <p>同时滚动改变</p>
+      <CountTo
+        ref="countToScroll"
+        mode="scrollDown"
+        :end-val="25678"
+        :decimals="2"
+        decimal="."
+        :duration="3000"
+      >
+        <span slot="prefix">$</span>
+        <span slot="suffix">rmb</span>
+      </CountTo>
+      <div>
+        <button @click="startScroll">开始</button>
+        <button @click="pauseScroll">
+          {{ pausingScroll ? '继续' : '暂停' }}
+        </button>
+        <button @click="resetScroll">重置</button>
+      </div>
+    </div>
+
+    <div class="demo">
+      <p>同时滚动改变</p>
+      <CountTo
+        ref="countToScroll"
+        mode="scrollUp"
+        :end-val="25678"
+        :decimals="2"
+        decimal="."
+        :duration="3000"
+      >
+        <span slot="prefix">$</span>
+        <span slot="suffix">rmb</span>
+      </CountTo>
+    </div>
   </div>
 </template>
 
@@ -23,6 +66,7 @@ export default {
   data() {
     return {
       pausing: false,
+      pausingScroll: false,
     }
   },
   methods: {
@@ -38,6 +82,19 @@ export default {
     reset() {
       this.pausing = false
       this.$refs.countTo.reset()
+    },
+    startScroll() {
+      this.pausingScroll = false
+      this.$refs.countToScroll.start()
+    },
+    pauseScroll() {
+      if (this.pausingScroll) this.$refs.countToScroll.resume()
+      else this.$refs.countToScroll.pause()
+      this.pausingScroll = !this.pausingScroll
+    },
+    resetScroll() {
+      this.pausingScroll = false
+      this.$refs.countToScroll.reset()
     },
   },
 }

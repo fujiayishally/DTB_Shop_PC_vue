@@ -1,16 +1,23 @@
 <template>
-  <div>{{ displayVal }}</div>
+  <div :class="prefixCls">
+    <slot name="prefix"></slot>
+    <component :is="comp" ref="reference" />
+    <slot name="suffix"></slot>
+  </div>
 </template>
 
 <script>
-// import CountItem from './CountItem'
-import {
-  requestAnimationFrame,
-  cancelAnimationFrame,
-} from '@/utils/animationFrame'
+import CountByIncrease from './CountByIncrease'
+import CountByScroll from './CountByScroll'
+import { isNumber } from '@/utils/assist'
+
+const prefixCls = 'vu-count-to'
 export default {
   name: 'CountTo',
-  // components: { CountItem },
+  components: { CountByIncrease, CountByScroll },
+  provide() {
+    return { CountTo: this }
+  },
   props: {
     startVal: {
       type: Number,
@@ -48,10 +55,6 @@ export default {
       type: Boolean,
       default: true,
     },
-    easing: {
-      type: String,
-      default: 'ease',
-    },
     useEasing: {
       type: Boolean,
       default: true,
@@ -66,30 +69,65 @@ export default {
         return (c * (-Math.pow(2, (-10 * t) / d) + 1) * 1024) / 1023 + b
       },
     },
-    prefix: {
+    mode: {
+      // 数值变化方式
       type: String,
-      default: '',
-    },
-    suffix: {
-      type: String,
-      default: '',
+      default: 'increase',
+      validator(value) {
+        return ['increase', 'scrollUp', 'scrollDown'].includes(value)
+      },
     },
   },
   data() {
     return {
-      startTime: null,
+      prefixCls,
+      startTimeStamp: null,
+      cacheProcess: 0,
       process: 0,
-      rAFID: null,
-      currentVal: this.startVal,
       pausing: false,
+      rAFID: null,
     }
   },
   computed: {
-    countDowm() {
-      return this.startVal > this.endVal
+    comp() {
+      return this.mode === 'increase' ? 'CountByIncrease' : 'CountByScroll'
     },
-    displayVal() {
-      return this.formatNumber(this.currentVal)
+    countDowm() {
+      let value
+      if (this.mode === 'increase') value = this.startVal > this.endVal
+      else value = this.mode === 'scrollDown'
+      return value
+    },
+    calculator() {
+      const { useEasing, countDowm, easingFn, duration } = this
+
+      let fn = function() {}
+
+      if (useEasing && countDowm) {
+        fn = ({ startVal, endVal, process }) => {
+          return startVal - easingFn(process, 0, startVal - endVal, duration)
+        }
+      }
+
+      if (useEasing && !countDowm) {
+        fn = ({ startVal, endVal, process }) => {
+          return easingFn(process, startVal, endVal - startVal, duration)
+        }
+      }
+
+      if (!useEasing && countDowm) {
+        fn = ({ startVal, endVal, process }) => {
+          return startVal - ((startVal - endVal) * process) / duration
+        }
+      }
+
+      if (!useEasing && !countDowm) {
+        fn = ({ startVal, endVal, process }) => {
+          return startVal + ((endVal - startVal) * process) / duration
+        }
+      }
+
+      return fn
     },
   },
   watch: {
@@ -99,75 +137,52 @@ export default {
     endVal() {
       if (this.autoPlay) this.start()
     },
+    process() {
+      this.$refs.reference.updateFrame()
+    },
   },
   methods: {
-    isNumber(val) {
-      return !isNaN(parseFloat(val))
-    },
     formatNumber(number) {
-      if (!this.isNumber(number)) return
+      const { decimals, useGrouping, decimal, separator } = this
+      if (!isNumber(number)) return
 
-      number = number.toFixed(this.decimals).split('.')
+      number = number.toFixed(decimals).split('.')
 
-      if (this.useGrouping) number[0] = parseFloat(number[0]).toLocaleString()
+      if (useGrouping) number[0] = parseFloat(number[0]).toLocaleString()
 
-      number = number.join(this.decimal).replace(/,/g, this.separator)
+      number = number.join(decimal).replace(/,/g, separator)
 
-      return this.prefix + number + this.suffix
+      return number
     },
+    updateFrameData() {},
     frame(timeStamp) {
-      let {
-        startTimeStamp,
-        startVal,
-        endVal,
-        duration,
-        rAFID,
-        useEasing,
-        countDowm,
-        easingFn,
-        process,
-      } = this
-      let currentVal
+      if (!this.startTimeStamp) this.startTimeStamp = timeStamp
 
-      if (!startTimeStamp) startTimeStamp = this.startTimeStamp = timeStamp
-      process = timeStamp - startTimeStamp
+      let process = (timeStamp - this.startTimeStamp).toFixed(3)
 
       if (this.pausing) {
-        if (!this.process) this.process = process
+        // debugger
+
+        if (!this.cacheProcess) this.cacheProcess = process
         return
-      } else {
-        if (!this.process) this.process = process
       }
+      this.process = this.cacheProcess ? this.cacheProcess : process
+      this.cacheProcess = 0
 
-      if (useEasing && countDowm)
-        currentVal =
-          startVal - easingFn(this.process, 0, startVal - endVal, duration)
-
-      if (useEasing && !countDowm)
-        currentVal = easingFn(
-          this.process,
-          startVal,
-          endVal - startVal,
-          duration,
-        )
-      if (!useEasing && countDowm)
-        currentVal = startVal - ((startVal - endVal) * this.process) / duration
-
-      if (!useEasing && !countDowm)
-        currentVal = startVal + ((endVal - startVal) * this.process) / duration
-
-      if (countDowm) currentVal = currentVal < endVal ? endVal : currentVal
-      else currentVal = currentVal > endVal ? endVal : currentVal
-      this.currentVal = currentVal
-
-      cancelAnimationFrame(rAFID)
-      if (this.process < duration) {
+      cancelAnimationFrame(this.rAFID)
+      if (this.process < this.duration) {
         this.rAFID = requestAnimationFrame(this.frame)
       } else {
-        this.$emit('on-counted', this.currentVal, this.displayVal)
+        this.$emit('on-counted')
       }
-
-      this.process = null
+    },
+    reset() {
+      cancelAnimationFrame(this.rAFID)
+      this.startTimeStamp = null
+      this.process = 0
+      this.cacheProcess = 0
+      this.pausing = false
+      this.rAFID = null
     },
     start() {
       this.reset()
@@ -176,28 +191,24 @@ export default {
     },
     pause() {
       this.pausing = true
-      this.$emit('on-pause')
     },
     resume() {
       this.pausing = false
       this.rAFID = requestAnimationFrame(this.frame)
-      this.$emit('on-resume')
-    },
-    reset() {
-      this.currentVal = this.startVal
-      this.startTimeStamp = null
-      this.pausing = false
-      this.process = 0
-      cancelAnimationFrame(this.rAFID)
     },
   },
   mounted() {
     if (this.autoPlay) this.start()
   },
   beforeDestroy() {
-    cancelAnimationFrame(this.rAFID)
+    cancelAnimationFrame(this.tagID)
   },
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.vu-count-to {
+  display: inline-block;
+  position: relative;
+}
+</style>
