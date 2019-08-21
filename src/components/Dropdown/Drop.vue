@@ -85,7 +85,6 @@ export default {
               },
             },
             onCreate: data => {
-              console.log('crate', data)
               this.resetTransformOrigin(data)
               this.$nextTick(this.popper.update())
             },

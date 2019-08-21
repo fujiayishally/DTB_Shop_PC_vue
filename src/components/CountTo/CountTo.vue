@@ -1,7 +1,9 @@
 <template>
   <div :class="prefixCls">
     <slot name="prefix"></slot>
-    <component :is="comp" ref="reference" />
+    <keep-alive>
+      <component :is="comp" ref="reference" />
+    </keep-alive>
     <slot name="suffix"></slot>
   </div>
 </template>
@@ -137,9 +139,6 @@ export default {
     endVal() {
       if (this.autoPlay) this.start()
     },
-    process() {
-      this.$refs.reference.updateFrame()
-    },
   },
   methods: {
     formatNumber(number) {
@@ -154,20 +153,18 @@ export default {
 
       return number
     },
-    updateFrameData() {},
     frame(timeStamp) {
       if (!this.startTimeStamp) this.startTimeStamp = timeStamp
 
       let process = (timeStamp - this.startTimeStamp).toFixed(3)
 
       if (this.pausing) {
-        // debugger
-
         if (!this.cacheProcess) this.cacheProcess = process
         return
       }
       this.process = this.cacheProcess ? this.cacheProcess : process
       this.cacheProcess = 0
+      this.$refs.reference.updateFrame()
 
       cancelAnimationFrame(this.rAFID)
       if (this.process < this.duration) {

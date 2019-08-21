@@ -2019,7 +2019,7 @@
       ]
     }
   ],
-  "Swipers": [
+  "carousels": [
     {
       "img": "https://image.dtb315.com/6659573.jpg",
       "bg": "#E5E8EB"
@@ -2027,6 +2027,24 @@
     {
       "img": "https://image.dtb315.com/6729898.jpg",
       "bg": "#F2D8B5"
+    }
+  ],
+  "zones": [
+    {
+      "img": "https://dtb315.com/Static//pc/home/images/index/index/kitchen.png?v=r6zfuf",
+      "id": "0"
+    },
+    {
+      "img": "https://dtb315.com/Static//pc/home/images/index/index/cate.png?v=18115om",
+      "id": "1"
+    },
+    {
+      "img": "https://dtb315.com/Static//pc/home/images/index/index/quality.png?v=1yjxhtk",
+      "id": "3"
+    },
+    {
+      "img": "https://dtb315.com/Static//pc/home/images/index/index/vegetarian.png?v=1vcedl",
+      "id": "2"
     }
   ],
   "consults": [

@@ -38,6 +38,9 @@ export default {
     listHeight() {
       this.scrollers = this.getScrollers()
     },
+    ['$parent.endVal']() {
+      this.scrollers = this.getScrollers()
+    },
   },
   methods: {
     getScrollers() {
@@ -68,7 +71,6 @@ export default {
             translateY,
           })
         })
-
       return result
     },
     updateFrame() {
@@ -106,8 +108,6 @@ export default {
     text-align: center;
     vertical-align: top;
     overflow: hidden;
-  }
-  &-list {
   }
 }
 </style>
